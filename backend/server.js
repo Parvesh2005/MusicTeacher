@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 
 // Route imports
 const authRoutes = require('./routes/auth');
@@ -20,22 +21,17 @@ mongoose.connect(process.env.MONGO_URI)
     .catch(err => console.error('MongoDB connection error:', err));
 
 // API Routes
-app.get('/', (req, res) => res.send('MusicTeacher.live API is running!'));
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
 
-const path = require('path');
-
+// Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/dist')));
+    const frontendPath = path.join(__dirname, '../client/dist'); // adjust if build folder differs
+    app.use(express.static(frontendPath));
 
-    app.get('*', (req, res) => 
-        res.sendFile(
-            path.resolve(__dirname, '../', 'client', 'dist', 'index.html')
-        )
-    );
+    app.get('*', (req, res) => res.sendFile(path.join(frontendPath, 'index.html')));
 } else {
-    app.get('/', (req, res) => res.send('Please set to production'));
+    app.get('/', (req, res) => res.send('API is running in development mode'));
 }
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

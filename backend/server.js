@@ -26,7 +26,7 @@ app.use('/api/profile', profileRoutes);
 
 // Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
-    const frontendPath = path.join(__dirname, '../client/dist'); // adjust if build folder differs
+    const frontendPath = path.join(__dirname, '../frontend/dist');
     app.use(express.static(frontendPath));
 
     app.get('*', (req, res) => res.sendFile(path.join(frontendPath, 'index.html')));

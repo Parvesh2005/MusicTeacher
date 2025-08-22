@@ -1,0 +1,28 @@
+{
+  "name": "musicteacher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "server": "nodemon server/index.js",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm install && npm install --prefix client && npm run build --prefix client"
+  },
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Parvesh2005/MusicTeacher.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Parvesh2005/MusicTeacher/issues"
+  },
+  "homepage": "https://github.com/Parvesh2005/MusicTeacher#readme"
+}

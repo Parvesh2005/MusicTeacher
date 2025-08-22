@@ -15,7 +15,7 @@ const RegisterTeacher = () => {
         e.preventDefault();
         setError('');
         try {
-            const { data } = await axios.post('http://localhost:5001/api/auth/register', { name, email, password, role: 'teacher' });
+            const { data } = await axios.post('/api/auth/register', { name, email, password, role: 'teacher' });
             login(data, data.token);
             navigate('/profile');
         } catch (err) {

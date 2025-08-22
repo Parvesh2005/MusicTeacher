@@ -52,7 +52,7 @@ const TeacherProfile = () => {
         e.preventDefault();
         setMessage('');
         try {
-            const { data } = await axios.put('http://localhost:5001/api/profile/me', { name, email, skills, availability });
+            const { data } = await axios.put('/api/profile/me', { name, email, skills, availability });
             setUser(data);
             setMessage('Profile updated successfully!');
         } catch (error) {
